@@ -5,7 +5,7 @@ import { makeDraggable } from "../system/system_windowManager.js";
 import { removeWindow } from "../system/system_windowManager.js";
 import { $systemLockScreen } from "../system/system_lockScreen.js";
 
-document.getElementById("vince.js").addEventListener("click", () => {
+document.getElementById("flipclock.js").addEventListener("click", () => {
 
     const winFrame = $system_services_createElement.layouts(
         "div", 
