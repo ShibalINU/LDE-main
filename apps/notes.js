@@ -53,7 +53,7 @@ document.getElementById("notes.js").addEventListener("click", () => {
         {
         
         },
-        "Hello, enter your notes",
+        "Hello, enter your notes:",
         section)
     var sidebar = $system_services_createElemen.layouts(
         
