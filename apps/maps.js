@@ -56,7 +56,7 @@ document.getElementById("maps.js").addEventListener("click", () => {
         height:"100%",
         style: "border:none;"
     },
-        "iframe",
+        "",
         section)
 
     winContent.style.width = "600px";

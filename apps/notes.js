@@ -49,11 +49,11 @@ document.getElementById("notes.js").addEventListener("click", () => {
         "",
         winContent)
     $system_services_createElement.layouts(
-        "textarea",
+        "h2",
         {
         
         },
-        "",
+        "Hello, enter your notes",
         section)
     var sidebar = $system_services_createElemen.layouts(
         
