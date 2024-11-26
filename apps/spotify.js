@@ -5,7 +5,7 @@ import { makeDraggable } from "../system/system_windowManager.js";
 import { removeWindow } from "../system/system_windowManager.js";
 import { $systemLockScreen } from "../system/system_lockScreen.js";
 
-document.getElementById("notes.js").addEventListener("click", () => {
+document.getElementById("spotify.js").addEventListener("click", () => {
 
     const winFrame = $system_services_createElement.layouts(
         "div", 
@@ -22,7 +22,7 @@ document.getElementById("notes.js").addEventListener("click", () => {
     const winTitle = $system_services_createElement.layouts(
         "small",
         {className: "winTitle"},
-        "notes",
+        "spotify",
         winHead);
 
     const winQuit = $system_services_createElement.layouts(
@@ -49,16 +49,17 @@ document.getElementById("notes.js").addEventListener("click", () => {
         "",
         winContent)
     $system_services_createElement.layouts(
-        "textarea",
+        "iframe",
         {
-        
+        src:"https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3",
+        width:"100%",
+        height:"100%"
         },
         "Hello, enter your notes:",
         section)
-
-
+        
     winContent.style.width = "600px";
-    winContent.style.height = "550px";
+    winContent.style.height = "600px";
     makeDraggable(winHead);
     removeWindow(winQuit);
 });
