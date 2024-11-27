@@ -6,6 +6,7 @@ localStorage.setItem('krita.js', '');
 localStorage.setItem('settings.js', '');
 localStorage.setItem('readme.js', '');
 localStorage.setItem('webcam.js', '');
+localStorage.setItem('files.js', '');
 
 for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
