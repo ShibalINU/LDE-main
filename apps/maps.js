@@ -58,7 +58,7 @@ document.getElementById("maps.js").addEventListener("click", () => {
     },
         "",
         section)
-
+       
     winContent.style.width = "600px";
     winContent.style.height = "550px";
     makeDraggable(winHead);
