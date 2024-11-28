@@ -23,6 +23,18 @@ document.getElementById("textedit.js").addEventListener("click", () => {
     const notepadPage = $system_services_createPage("\uE70F", "Notes", winSidebar, winContent);
     const viewNotesPage = $system_services_createPage("\uE8D2", "History", winSidebar, winContent);
 
+    var alert = $system_services_createElement.layouts(
+        "div",
+        {className: "winAlerts"},
+        "",
+        winSidebar)
+
+        $system_services_createElement.layouts(
+            "p",
+            {},
+            "Fun fact: GPT 4o wrote this code.",
+            alert)
+
     // Notepad Page
     const notepadSection = $system_services_createElement.layouts(
         "section",
@@ -85,23 +97,6 @@ document.getElementById("textedit.js").addEventListener("click", () => {
         const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
         notesContainer.innerHTML = ""; // Clear existing notes
 
-        var headings1 = $system_services_createElement.layouts(
-            "h2",
-            {},
-            "History",
-            notesContainer)
-
-        var alert = $system_services_createElement.layouts(
-            "div",
-            {className: "winAlerts"},
-            "",
-            notesContainer)
-
-            $system_services_createElement.layouts(
-                "p",
-                {},
-                "Fun fact: GPT 4o wrote this code.",
-                alert)
                 if (savedNotes.length) {
                     savedNotes.forEach((note) => {
                         // Create a container for each note
