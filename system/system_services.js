@@ -13,7 +13,6 @@ function displayFatalError(errorMessage) {
     document.body.innerHTML = display;
 }
 
-// Modified $system_services_createElement with error handling
 export const $system_services_createElement = {
     // for blocks e.g. div, p, h1, etc.
     layouts: (html_tag = "", html_attributes = {}, element_innerText = "", html_appendTo = null) => {
@@ -90,50 +89,56 @@ export const $system_services_createIconButton = (iconButton_icon = "", iconButt
     return $processor_group;
 }
 
-// Modified $system_services_createPage with error handling
+// creating pages
 export const $system_services_createPage = (page_icon = "", page_text = "", page_appendTo = null, section_parent = null) => {
     try {
-        const $packed = () => {
-            const $processor_icon = document.createElement("div");
-            $processor_icon.classList.add("icon");
-            $processor_icon.innerText = page_icon;
-        
-            const $processor_text = document.createElement("p");
-            $processor_text.innerText = page_text;
-        
-            const $processor_group = document.createElement("div");
-            $processor_group.classList.add("winSidebarPage");
-            $processor_group.appendChild($processor_icon);
-            $processor_group.appendChild($processor_text);
-        
+        // Create the sidebar page element
+        const $processor_icon = document.createElement("div");
+        $processor_icon.classList.add("icon");
+        $processor_icon.innerText = page_icon;
+
+        const $processor_text = document.createElement("p");
+        $processor_text.innerText = page_text;
+
+        const $processor_group = document.createElement("div");
+        $processor_group.classList.add("winSidebarPage");
+        $processor_group.appendChild($processor_icon);
+        $processor_group.appendChild($processor_text);
+
+        // Append to the parent sidebar
+        if (page_appendTo) {
             page_appendTo.appendChild($processor_group);
-        
-            return $processor_group;
-        };
-        
-        const packed = $packed();
-        
-        packed.addEventListener("click", () => {
+        } else {
+            throw new Error("Page appendTo parent is undefined.");
+        }
+
+        // Add event listener for section toggling
+        $processor_group.addEventListener("click", () => {
             try {
-                var select = packed.querySelector("p");
-        
-                if (select) {
-                    var winContentH = section_parent.querySelectorAll("section");
-        
-                    winContentH.forEach((winContent) => {
+                const selectedText = $processor_text.textContent;
+
+                if (section_parent) {
+                    const winContentSections = section_parent.querySelectorAll("section");
+
+                    winContentSections.forEach((winContent) => {
                         winContent.classList.add("hidden");
-                        if (winContent.classList.contains(select.textContent)) {
+                        if (winContent.classList.contains(selectedText)) {
                             winContent.classList.remove("hidden");
                         }
                     });
+                } else {
+                    console.error("section_parent is undefined.");
                 }
             } catch (error) {
-                console.error(error);
+                console.error("Error in sidebar click event:", error);
                 displayFatalError(error.message);
             }
         });
+
+        // Return the created sidebar page
+        return $processor_group;
     } catch (error) {
-        console.error(error);
+        console.error("Error creating page:", error);
         displayFatalError(error.message);
     }
 };
