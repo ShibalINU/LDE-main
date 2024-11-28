@@ -3,6 +3,7 @@ import { $system_services_createPage } from "../system/system_services.js";
 import { $system_services_createIconButton } from "../system/system_services.js";
 import { makeDraggable } from "../system/system_windowManager.js";
 import { removeWindow } from "../system/system_windowManager.js";
+import { makeResizable } from "../system/system_windowManager.js";
 
 document.getElementById("files.js").addEventListener("click", () => {
 
@@ -58,7 +59,14 @@ document.getElementById("files.js").addEventListener("click", () => {
 
     winContent.style.width = "900px";
     winContent.style.height = "500px";
+    // Make window draggable
     makeDraggable(winHead);
+
+    // Make window resizable
+    makeResizable(winFrame);
+
+    // Enable window close functionality
     removeWindow(winQuit);
+
 });
 

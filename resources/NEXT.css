@@ -712,3 +712,27 @@ pre {
 .dummyContainer {
     padding: var(--globalSpacing);
 }
+.resizers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.resizer {
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    position: absolute;
+    cursor: ew-resize;
+    pointer-events: all;
+}
+
+.resizer.top-left { top: -5px; left: -5px; cursor: nwse-resize; }
+.resizer.top-right { top: -5px; right: -5px; cursor: nesw-resize; }
+.resizer.bottom-left { bottom: -5px; left: -5px; cursor: nesw-resize; }
+.resizer.bottom-right { bottom: -5px; right: -5px; cursor: nwse-resize; }
+.resizer.top { top: -5px; left: 0; right: 0; height: 10px; cursor: ns-resize; }
+.resizer.right { top: 0; right: -5px; bottom: 0; width: 10px; cursor: ew-resize; }
+.resizer.bottom { left: 0; right: 0; bottom: -5px; height: 10px; cursor: ns-resize; }
+.resizer.left { top: 0; left: -5px; bottom: 0; width: 10px; cursor: ew-resize; }
