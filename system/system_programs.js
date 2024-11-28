@@ -5,8 +5,7 @@ localStorage.setItem('calendar.js', '');
 localStorage.setItem('krita.js', '');
 localStorage.setItem('settings.js', '');
 localStorage.setItem('readme.js', '');
-localStorage.setItem('webcam.js', '');
-localStorage.setItem('files.js', '');
+localStorage.setItem('ldefs.js', '');
 
 for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
