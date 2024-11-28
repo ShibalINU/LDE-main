@@ -62,9 +62,6 @@ document.getElementById("files.js").addEventListener("click", () => {
     // Make window draggable
     makeDraggable(winHead);
 
-    // Make window resizable
-    makeResizable(winFrame);
-
     // Enable window close functionality
     removeWindow(winQuit);
 
