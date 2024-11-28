@@ -712,3 +712,106 @@ pre {
 .dummyContainer {
     padding: var(--globalSpacing);
 }
+
+/* LDE Virtual File System | LarkFS */
+
+.nav-container {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+  }
+  
+  #address-bar {
+    width: calc(100% - 120px);
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  
+  button {
+    border-radius: 3px;
+    padding: 8px 12px;
+    margin: 0 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #80808020;
+  }
+  
+  #folder-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+    padding: 20px;
+  }
+  
+  .directory, .file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: center;
+  }
+  
+  .directory:hover, .file:hover {
+    background-color: #80808020;
+  }
+  
+  .directory img, .file img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+    transition: transform 0.2s ease;
+  }
+  
+  .directory:hover img, .file:hover img {
+    transform: scale(1.05);
+  }
+
+  .directory div, .file div {
+    font-size: 13px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .selected {
+    background-color: #0080ff20;
+    border-radius: 5px;
+  }
+  
+  .selected img {
+    opacity: 0.8;
+  }
+  
+  @media (max-width: 600px) {
+    #address-bar {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    
+    button {
+      margin: 5px;
+    }
+    
+    #folder-list {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 12px;
+      padding: 12px;
+    }
+
+    #folder-list > * {
+      animation: moveLeft 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    }
+  }
