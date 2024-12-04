@@ -64,4 +64,3 @@ document.getElementById("compiler.js").addEventListener("click", () => {
     makeDraggable(winHead);
     removeWindow(winQuit);
 });
-
