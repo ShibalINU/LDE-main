@@ -1,5 +1,7 @@
 import { $system_services_createElement } from "./system_services.js";
 
+document.body.textContent = ''
+
 if (!localStorage.getItem('STORE_SYSTEM_PASSWORD')) {
     localStorage.setItem('STORE_SYSTEM_PASSWORD', '');
 }
@@ -8,8 +10,76 @@ if (!localStorage.getItem('STORE_SYSTEM_USERNAME')) {
     localStorage.setItem('STORE_SYSTEM_USERNAME', 'User');
 }
 
+export const $systemLock = (h2 = "", callback = null) => {
+    var Overlay = $system_services_createElement.layouts(
+        "div",
+        { className: "shape-isOverlay animate-fadeScaleIn" },
+        "",
+        document.body
+    );
 
-// Lockscreen and UAC
+    var StackGroup1 = $system_services_createElement.layouts(
+        "div",
+        {className: "layout-centerize"},
+        "",
+        Overlay
+    );
+
+    $system_services_createElement.layouts(
+        "p",
+        {className: "lockscreen-date"},
+        "Saturday 7 December",
+        StackGroup1
+    );
+
+    $system_services_createElement.layouts(
+        "p",
+        {className: "lockscreen-time"},
+        "3:29",
+        StackGroup1
+    );
+
+    
+    
+    $system_services_createElement.layouts(
+        "hr",
+        {className: "layout-whitespace"},
+        "",
+        Overlay
+    );
+
+    var StackGroup2 = $system_services_createElement.layouts(
+        "div",
+        {className: "layout-centerize layout-addSpacing"},
+        "",
+        Overlay
+    );
+
+    $system_services_createElement.layouts(
+        "p",
+        {},
+        h2,
+        StackGroup2
+    );
+
+    const lockScreenPASSWORD = $system_services_createElement.inputs(
+        "input",
+        { type: "password", placeholder: "Enter password" },
+        StackGroup2
+    );
+
+    lockScreenPASSWORD.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            if (lockScreenPASSWORD.value === localStorage.getItem("STORE_SYSTEM_PASSWORD")) { // Admin password validation
+                Overlay.remove();
+                if (callback) callback(); // Execute callback if password is correct
+            } else {
+                alert("Incorrect administrator password");
+            }
+        }
+    });
+}
+
 export const $systemLockScreen = (h2 = "", small = "", callback = null) => {
     const lockScreenFRAMEP = $system_services_createElement.layouts(
         "div",
@@ -91,9 +161,10 @@ export const $systemLockScreen = (h2 = "", small = "", callback = null) => {
     });
 }
 
+
 const lock = document.getElementById("id")
 if (!lock) {
-    $systemLockScreen(localStorage.getItem("STORE_SYSTEM_USERNAME"), "Do not forget your password", function() {
+    $systemLock(localStorage.getItem("STORE_SYSTEM_USERNAME"), function() {
         const $system_taskbar = document.createElement("script");
         $system_taskbar.setAttribute("src", "./system/system_taskbar.js");
         $system_taskbar.setAttribute("type", "module");

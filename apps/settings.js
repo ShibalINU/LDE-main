@@ -55,7 +55,7 @@ const newDataAttribute = (htmlTag, dataAttr, dataAttrVal, className, appendTo) =
     return newElement;
 };
 
-document.getElementById("settings.js").addEventListener("click", () => {
+document.getElementById("settings.util").addEventListener("click", () => {
 
     const winFrame = $system_services_createElement.layouts(
         "div", 

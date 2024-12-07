@@ -1,24 +1,36 @@
 import { $system_services_createElement, $system_services_createIconButton } from "./system_services.js"; // Ensure correct case
+import { opus } from "../core/opusFS.js";
+// Assuming `opus` is your FS API and `startMenu` is the parent element for app icons
+// Define the path to the Utilities directory
+const utilitiesPath = ['root', 'LDE', 'Utilities'];
 
-// default apps:
-localStorage.setItem('calendar.js', '');
-localStorage.setItem('krita.js', '');
-localStorage.setItem('settings.js', '');
-localStorage.setItem('readme.js', '');
-localStorage.setItem('ldefs.js', '');
+// Fetch the Utilities directory node
+const utilitiesNode = opus.getNode(utilitiesPath);
 
-for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    let newAddress = "apps/" + key
+if (utilitiesNode && utilitiesNode.contents) {
+    // Loop through all contents of the Utilities directory
+    utilitiesNode.contents.forEach(item => {
+        // Check if the item is a .util file
+        if (item.type === 'file' && item.name.endsWith('.util')) {
+            // Read the file's content using opus.readFile
+            const appFile = opus.readFile([...utilitiesPath, item.name]);
 
-    if (key.includes(".js")) {
-        const $system_programs_qualified_app = document.createElement("script");
-        $system_programs_qualified_app.setAttribute("src", newAddress);
-        $system_programs_qualified_app.setAttribute("type", "module");
-        document.body.appendChild($system_programs_qualified_app);
+            if (appFile) {
+                // Dynamically create a script element to load the app
+                const appScript = document.createElement('script');
+                appScript.src = appFile.content; // Use the content as the source path
+                appScript.type = 'module';
+                document.body.appendChild(appScript);
 
-        $system_services_createIconButton("\uEA86", key, { id: key }, startMenu)
+                // Create an icon for the app in the UI
+                $system_services_createIconButton("\uEA86", item.name, { id: item.name }, startMenu);
 
-        console.log("Installed or Registered:", key);
-    }
+                console.log(`App loaded: ${item.name}`);
+            } else {
+                console.error(`Failed to load app: ${item.name}`);
+            }
+        }
+    });
+} else {
+    console.error("Utilities directory not found or is empty.");
 }
