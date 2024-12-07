@@ -91,9 +91,64 @@ export const $systemLockScreen = (h2 = "", small = "", callback = null) => {
     });
 }
 
+export const $systemLock = (h2 = "", callback = null) => {
+    const lockScreenFRAMEP = $system_services_createElement.layouts(
+        "div",
+        { className: "lockScreenFRAMEP" },
+        "",
+        document.body
+    );
+    lockScreenFRAMEP.style.zIndex = 999;
+
+    var section = $system_services_createElement.layouts(
+        "div",
+        {className: "lockSF"},
+        "",
+        lockScreenFRAMEP
+    );
+
+    $system_services_createElement.layouts(
+        "h1",
+        {},
+        h2,
+        section
+    );
+
+    // $system_services_createElement.layouts(
+    //     "hr",
+    //     {},
+    //     "",
+    //     section
+    // );
+
+    const lockScreenPASSWORD = $system_services_createElement.inputs(
+        "input",
+        { type: "password", placeholder: "Enter your password" },
+        section
+    );
+
+    $system_services_createElement.layouts(
+        "small",
+        {title: "LDE2 is in the making"},
+        "Developer Notes...",
+        section
+    );
+
+    lockScreenPASSWORD.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            if (lockScreenPASSWORD.value === localStorage.getItem("STORE_SYSTEM_PASSWORD")) { // Admin password validation
+                lockScreenFRAMEP.remove();
+                if (callback) callback(); // Execute callback if password is correct
+            } else {
+                alert("Incorrect administrator password");
+            }
+        }
+    });
+}
+
 const lock = document.getElementById("id")
 if (!lock) {
-    $systemLockScreen(localStorage.getItem("STORE_SYSTEM_USERNAME"), "Do not forget your password", function() {
+    $systemLock(localStorage.getItem("STORE_SYSTEM_USERNAME"), function() {
         const $system_taskbar = document.createElement("script");
         $system_taskbar.setAttribute("src", "./system/system_taskbar.js");
         $system_taskbar.setAttribute("type", "module");

@@ -658,6 +658,17 @@ button:hover {
     width: 300px;
 }
 
+.lockScreenFRAMEP .lockSF {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    animation: moveLeft 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.lockScreenFRAMEP .lockSF input[type="password"]:focus {
+    background-color: var(--plate);
+}
+
 #appID {
     display: none;
 }
