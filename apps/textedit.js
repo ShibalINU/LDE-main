@@ -1,9 +1,6 @@
 import { $system_services_createElement } from "../system/system_services.js";
 import { $system_services_createPage } from "../system/system_services.js";
-import { makeDraggable } from "../system/system_windowManager.js";
-import { removeWindow } from "../system/system_windowManager.js";
-
-
+import { makeDraggable, removeWindow, makeResizable } from "../system/system_windowManager.js";
 
 document.getElementById("textedit.js").addEventListener("click", () => {
     // Create the window frame
@@ -27,27 +24,26 @@ document.getElementById("textedit.js").addEventListener("click", () => {
         "div",
         {className: "winAlerts"},
         "",
-        winSidebar)
+        winSidebar);
 
-        $system_services_createElement.layouts(
-            "p",
-            {},
-            "Fun fact: GPT 4o wrote this code.",
-            alert)
+    $system_services_createElement.layouts(
+        "p",
+        {},
+        "Fun fact: GPT 4o wrote this code.",
+        alert);
 
     // Notepad Page
     const notepadSection = $system_services_createElement.layouts(
         "section",
         { className: "Notes" },
         "",
-        winContent
-    );
+        winContent);
 
     var headings1 = $system_services_createElement.layouts(
         "h2",
         {},
         "Notes",
-        notepadSection)
+        notepadSection);
 
     const textArea = $system_services_createElement.layouts(
         "textarea",
@@ -55,15 +51,13 @@ document.getElementById("textedit.js").addEventListener("click", () => {
             placeholder: "Write your notes here..."
         },
         "",
-        notepadSection
-    );
+        notepadSection);
 
     const saveButton = $system_services_createElement.layouts(
         "button",
         {},
         "Save Note",
-        notepadSection
-    );
+        notepadSection);
 
     saveButton.addEventListener("click", () => {
         const note = textArea.value.trim();
@@ -83,60 +77,54 @@ document.getElementById("textedit.js").addEventListener("click", () => {
         "section",
         { className: "History hidden" }, // Initially hidden
         "",
-        winContent
-    );
+        winContent);
 
     const notesContainer = $system_services_createElement.layouts(
         "div",
         {},
         "",
-        notesSection
-    );
+        notesSection);
 
     const loadNotes = () => {
         const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
         notesContainer.innerHTML = ""; // Clear existing notes
 
-                if (savedNotes.length) {
-                    savedNotes.forEach((note) => {
-                        // Create a container for each note
-                        const noteContainer = $system_services_createElement.layouts(
-                            "div",
-                            {className: "winCards"},
-                            "", // No inner text here, we will build content manually
-                            notesContainer
-                        );
-                
-                        // Create and add the time element
-                        const noteTime = $system_services_createElement.layouts(
-                            "b",
-                            {},
-                            note.time,
-                            noteContainer
-                        );
-                
-                        // Create and add the content element
-                        const noteContent = $system_services_createElement.layouts(
-                            "div",
-                            {},
-                            note.content,
-                            noteContainer
-                        );
-                    });
-                } else {
-                    notesContainer.textContent = "No notes saved.";
-                }
-                
+        if (savedNotes.length) {
+            savedNotes.forEach((note) => {
+                // Create a container for each note
+                const noteContainer = $system_services_createElement.layouts(
+                    "div",
+                    {className: "winCards"},
+                    "", // No inner text here, we will build content manually
+                    notesContainer);
+
+                // Create and add the time element
+                const noteTime = $system_services_createElement.layouts(
+                    "b",
+                    {},
+                    note.time,
+                    noteContainer);
+
+                // Create and add the content element
+                const noteContent = $system_services_createElement.layouts(
+                    "div",
+                    {},
+                    note.content,
+                    noteContainer);
+            });
+        } else {
+            notesContainer.textContent = "No notes saved.";
+        }
     };
-    console.log("viewNotesPage:", viewNotesPage);
 
     // Load notes on page click
     viewNotesPage.addEventListener("click", loadNotes);
 
-    winContent.style.width = "500px"
-    winContent.style.height = "400px"
+    winContent.style.width = "500px";
+    winContent.style.height = "400px";
 
     // Window interaction handlers
     makeDraggable(winHead); // Draggable
+    makeResizable(winFrame); // Resizable
     removeWindow(winQuit); // Close button
 });

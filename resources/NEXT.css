@@ -1533,3 +1533,22 @@ pre {
       animation: moveLeft 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     }
   }
+  .winFrame {
+    position: absolute;
+    border: 1px solid #ccc;
+    resize: both;
+    overflow: auto;
+    z-index: 1;
+}
+
+.winHead {
+    background-color: #f1f1f1;
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+}
+
+.winContent {
+    width: 500px;
+    height: 400px;
+}
